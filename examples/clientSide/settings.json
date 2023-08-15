@@ -1,0 +1,94 @@
+{
+    "cyberRoyalMode": "list|pvwa",
+
+    "listMode": "adGroupRBAC|pvwaRBAC|listRBAC|listALL",
+    "listUrl": "https://YOUR-WEBHOST/ScriptData/cyberRoyalSafeAccountList.json",
+    "listPermissionUrl": "https://YOUR-WEBHOST/ScriptData/cyberRoyalPermissionList.json",
+    "adGroupSafeRegex": "CN=.*?(SafeName),OU=.*",
+
+    "pvwaUrl": "https://YOUR-PVWA/PasswordVault",
+
+    "pvwaAuthMethod": "LDAP",
+	"pvwaAuthRetries": 3,
+
+    "pvwaSafeSearch": "",
+    "pvwaSavedFilter": "Favorites|Recently",
+	"pvwaAdditionalPlatformAccountProperties": ["Location","FQDN"],
+
+    "safeFilter": ".*",
+    "excludeAccounts": ["guest"],
+    "excludeEmptyFolders": 1,
+
+    "psmRdpAddress": "YOUR-PSM-RDP",
+    "psmSshAddress": "YOUR-PSM-SSH",
+
+    "connectionNaming": "target|simple|named",
+    "connectionDescription": "location",
+
+    "folderCreation": "safeName|safeDescription|platform|accountParameter",
+    "folderAccountParameter": "Location",
+
+    "enableNLA": 0,
+    "rdpResizeMode": "SmartSizing",
+    "rdpAuthenticationLevel": 2,
+    "useWebPluginWin": "f008c2f0-5fb3-4c5e-a8eb-8072c1183088",
+
+    "platformMappings": {
+        "UnixSSH": {
+            "connections": [{ "type": "SSH", "components": ["PSMP-SSH"] }]
+        },
+        "LinuxLinux": {
+            "replacePsm": "another-ssh-proxy",
+            "connections": [
+                { "type": "SSH", "components": ["PSMP-SSH"] },
+                { "type": "SFTP", "components": ["PSMP-SFTP"] }
+            ]
+        },
+        "WindowsDomain": {
+            "psmRemoteMachine": 1,
+            "drivesRedirection": 1,
+			"connectionNaming": "named",
+            "connections": [{
+                    "type": "RDP",
+                    "components": ["PSM-RDP", "PSM-RDP-Console", "PSM-DSA"]
+                },
+                { "type": "SSH", "components": ["PSMP-BadExample"] }
+            ]
+        },
+        "ExchangeDomainUser": {
+            "replacePsm": "ANOTHER-PSM-ADDRESS",
+            "connections": [
+                { "type": "RDP", "components": ["PSM-RDP", "PSM-WebECP"] }
+            ]
+        },
+        "Fortigate": {
+            "color": "#FF0000",
+            "connections": [
+                { "type": "RDP", "components": ["PSM-FortiWeb"] },
+                { "type": "SSH", "components": ["PSMP-SSH"] }
+            ]
+        },
+        "Cyberark": {
+            "color": "#0f6ddd",
+            "connections": [
+                { "type": "RDP", "components": ["PSM-PVWA-v10"] },
+                { "type": "RDP", "components": ["PSM-PrivateArkClient"] }
+            ]
+        },
+        "WindowsServerLocal": {
+            "replaceName": "",
+            "replaceRegex": "@domain.acme.com",
+            "namePrefix": "Local - ",
+            "namePostfix": "",
+            "psmRemoteMachine": 0,
+            "connections": [{ "type": "RDP", "components": ["PSM-RDP"] }]
+        },
+        "AzureWebAccount": {
+            "namePrefix": "Azure - ",
+            "webProtocol": "https",
+            "webOverwriteUri": "",
+            "webInputObject": "input#i0116",
+            "connections": [{ "type": "WEB", "components": ["AzureWebsite"] }]
+        }
+    }
+}

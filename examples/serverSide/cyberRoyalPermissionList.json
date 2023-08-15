@@ -1,0 +1,38 @@
+{
+    "users": [
+        {
+            "username": "admin",
+            "permissions": [
+                "PAM",
+                "T0-WinAD",
+                "T0-WinADCS"
+            ]
+        },
+        {
+            "username": "user",
+            "permissions": [
+                "PAM",
+                "T0-WinAD"
+            ]
+        },
+        {
+            "username": "user1",
+            "permissions": [
+                "PAM",
+                "T1-WinServers"
+            ]
+        },
+        {
+            "username": "user2",
+            "permissions": [
+                "T0-WinAD"
+            ]
+        },
+        {
+            "username": "user3",
+            "permissions": [
+                "PAM"
+            ]
+        }
+    ]
+}
