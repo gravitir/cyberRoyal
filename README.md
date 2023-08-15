@@ -367,6 +367,6 @@ C:\Program Files\PowerShell\7\pwsh.exe
 
 ## Known limitations
 
-- SAML auth method for PVWA will not work, apply a list based mode (PowerShell SAML auth might come in the future)
+- SAML auth method for PVWA will not work, apply a list based mode if required (PowerShell SAML auth might come in the future)
 - Multiple and different connection entries for different connection components in the same Platform cannot be used actually
 - OLAC will not be differentiated from safe ACL to create accessable connections
