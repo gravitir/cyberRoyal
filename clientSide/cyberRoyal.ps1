@@ -392,7 +392,8 @@ function Get-PvwaAccountsFromSafes($safeDetails) {
 	$safesAndAccounts = [System.Collections.SortedList]::new()
 	foreach ($safe in $safeDetails) {
 		if (![string]::IsNullOrEmpty($settings.safeFilter) -and !([regex]::Match( $safe.SafeName, $settings.safeFilter ).Success )) { continue } 
-		$accountURL = $pvwaUrl + "/api/Accounts?limit=1000&filter=safeName eq $($safe.SafeName)"
+		$safeFilter = [uri]::EscapeDataString("""$($safe.SafeName)""")
+		$accountURL = "$pvwaUrl/api/Accounts?limit=1000&filter=safeName eq $safeFilter"
 		try { $accountsResult = $( Invoke-WebRequest -Uri $accountURL -Headers $global:header -Method Get).content | ConvertFrom-Json } catch { Invoke-ErrorMessage "Error" $_ }
 		if ($null -ne $accountsResult.value -and $accountsResult.value.Length -gt 0) {
 			$safeEntry = @{ "SafeName" = $safe.SafeName; "Description" = $safe.Description; "Accounts" = New-Object System.Collections.ArrayList }
