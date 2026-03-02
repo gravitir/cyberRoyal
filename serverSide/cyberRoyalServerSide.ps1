@@ -145,7 +145,8 @@ if ($debugOn) { Write-Host $stopWatch.Elapsed + " catched safes: $($safes.Count)
 $safesAndAccounts = [System.Collections.SortedList]::new()
 $accountEntriesCount = 0
 foreach ($safe in $safes) {
-	$accountURL = $pvwaUrl + '/api/Accounts?limit=1000&filter=safeName eq ' + $safe.SafeName
+	$safeFilter = [uri]::EscapeDataString("""$($safe.SafeName)""")
+	$accountURL = "$pvwaUrl/api/Accounts?limit=1000&filter=safeName eq $safeFilter"
 	$accountsResult = $(Invoke-Request -Uri $accountURL -Headers $header -Method Get).content | ConvertFrom-Json
 	if ($null -ne $accountsResult.value -and $accountsResult.value.Length -gt 0) {
 		$safeEntry = @{ "SafeName" = $safe.SafeName; "Description" = $safe.Description; "Accounts" = [System.Collections.Generic.List[object]]::new(); }
